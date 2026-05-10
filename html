@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ujian Online TKJ</title>
+
+<style>
+    body{
+        font-family: Arial;
+        background:#f2f2f2;
+        padding:20px;
+    }
+
+    .container{
+        max-width:800px;
+        margin:auto;
+        background:white;
+        padding:20px;
+        border-radius:10px;
+        box-shadow:0 0 10px rgba(0,0,0,0.2);
+    }
+
+    h1,h2{
+        text-align:center;
+    }
+
+    .soal{
+        margin-bottom:20px;
+    }
+
+    button{
+        padding:10px 20px;
+        background:blue;
+        color:white;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+    }
+
+    button:hover{
+        background:darkblue;
+    }
+
+    #ujian{
+        display:none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div id="login">
+        <h1>LOGIN UJIAN TKJ</h1>
+
+        <label>ID Card</label><br>
+        <input type="text" id="idcard" placeholder="Masukkan ID"><br><br>
+
+        <label>Password</label><br>
+        <input type="password" id="password" placeholder="Masukkan Password"><br><br>
+
+        <button onclick="login()">Login</button>
+
+        <p id="pesan"></p>
+    </div>
+
+    <!-- UJIAN -->
+    <div id="ujian">
+
+        <h1>UJIAN ONLINE</h1>
+
+        <!-- PILIHAN GANDA -->
+        <h2>Pilihan Ganda</h2>
+
+        <div class="soal">
+            <p>1. Ibu kota Indonesia?</p>
+            <input type="radio" name="pg1" value="A"> Bandung<br>
+            <input type="radio" name="pg1" value="B"> Jakarta<br>
+            <input type="radio" name="pg1" value="C"> Surabaya
+        </div>
+
+        <div class="soal">
+            <p>2. 5 + 5 = ?</p>
+            <input type="radio" name="pg2" value="A"> 8<br>
+            <input type="radio" name="pg2" value="B"> 9<br>
+            <input type="radio" name="pg2" value="C"> 10
+        </div>
+
+        <div class="soal">
+            <p>3. Bahasa pemrograman Android?</p>
+            <input type="radio" name="pg3" value="A"> Java<br>
+            <input type="radio" name="pg3" value="B"> Excel<br>
+            <input type="radio" name="pg3" value="C"> Paint
+        </div>
+
+        <div class="soal">
+            <p>4. Planet terbesar?</p>
+            <input type="radio" name="pg4" value="A"> Mars<br>
+            <input type="radio" name="pg4" value="B"> Jupiter<br>
+            <input type="radio" name="pg4" value="C"> Venus
+        </div>
+
+        <div class="soal">
+            <p>5. 10 x 2 = ?</p>
+            <input type="radio" name="pg5" value="A"> 20<br>
+            <input type="radio" name="pg5" value="B"> 30<br>
+            <input type="radio" name="pg5" value="C"> 40
+        </div>
+
+        <div class="soal">
+            <p>6. Hewan berkaki empat?</p>
+            <input type="radio" name="pg6" value="A"> Kucing<br>
+            <input type="radio" name="pg6" value="B"> Ikan<br>
+            <input type="radio" name="pg6" value="C"> Ayam
+        </div>
+
+        <div class="soal">
+            <p>7. Warna bendera Indonesia?</p>
+            <input type="radio" name="pg7" value="A"> Merah Putih<br>
+            <input type="radio" name="pg7" value="B"> Hijau<br>
+            <input type="radio" name="pg7" value="C"> Biru
+        </div>
+
+        <div class="soal">
+            <p>8. Alat input komputer?</p>
+            <input type="radio" name="pg8" value="A"> Keyboard<br>
+            <input type="radio" name="pg8" value="B"> Speaker<br>
+            <input type="radio" name="pg8" value="C"> Printer
+        </div>
+
+        <div class="soal">
+            <p>9. 100 / 10 = ?</p>
+            <input type="radio" name="pg9" value="A"> 5<br>
+            <input type="radio" name="pg9" value="B"> 10<br>
+            <input type="radio" name="pg9" value="C"> 20
+        </div>
+
+        <div class="soal">
+            <p>10. Sistem operasi?</p>
+            <input type="radio" name="pg10" value="A"> Windows<br>
+            <input type="radio" name="pg10" value="B"> Printer<br>
+            <input type="radio" name="pg10" value="C"> Mouse
+        </div>
+
+        <!-- ISIAN -->
+        <h2>Soal Isian</h2>
+
+        <div class="soal">
+            <p>1. Hasil 2 + 2 =</p>
+            <input type="text" id="isian1">
+        </div>
+
+        <div class="soal">
+            <p>2. Planet tempat kita tinggal?</p>
+            <input type="text" id="isian2">
+        </div>
+
+        <!-- URAIAN -->
+        <h2>Soal Uraian</h2>
+
+        <div class="soal">
+            <p>1. Jelaskan fungsi komputer!</p>
+            <textarea rows="4" cols="50"></textarea>
+        </div>
+
+        <div class="soal">
+            <p>2. Apa manfaat internet?</p>
+            <textarea rows="4" cols="50"></textarea>
+        </div>
+
+        <br>
+        <button onclick="selesai()">Selesai Ujian</button>
+
+        <h2 id="hasil"></h2>
+
+    </div>
+
+</div>
+
+<script>
+
+function login(){
+
+    let id = document.getElementById("idcard").value;
+    let pass = document.getElementById("password").value;
+
+    if(id === "085646tkj" && pass === "tkjhebat"){
+
+        document.getElementById("login").style.display = "none";
+        document.getElementById("ujian").style.display = "block";
+
+    }else{
+
+        document.getElementById("pesan").innerHTML =
+        "ID Card atau Password salah!";
+    }
+}
+
+function selesai(){
+
+    let nilai = 0;
+
+    // Kunci jawaban pilihan ganda
+    let kunci = {
+        pg1:"B",
+        pg2:"C",
+        pg3:"A",
+        pg4:"B",
+        pg5:"A",
+        pg6:"A",
+        pg7:"A",
+        pg8:"A",
+        pg9:"B",
+        pg10:"A"
+    };
+
+    for(let key in kunci){
+
+        let jawaban = document.querySelector(
+        'input[name="'+key+'"]:checked');
+
+        if(jawaban && jawaban.value === kunci[key]){
+            nilai += 5;
+        }
+    }
+
+    // Soal isian
+    if(document.getElementById("isian1").value == "4"){
+        nilai += 5;
+    }
+
+    if(document.getElementById("isian2").value.toLowerCase() == "bumi"){
+        nilai += 5;
+    }
+
+    // Nilai uraian otomatis
+    nilai += 10;
+
+    document.getElementById("hasil").innerHTML =
+    "Nilai Anda : " + nilai;
+}
+
+</script>
+
+</body>
+</html>
